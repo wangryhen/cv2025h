@@ -110,12 +110,12 @@
   </section>
 
   <!-- Efficiency -->
-  <section class="section">
+ <!-- <section class="section">
     <div class="container">
       <h2 class="title is-3">Efficiency</h2>
       <p>HiSTalk runs at 4.2 FPS (0.23 s/frame) on an NVIDIA RTX 3090, using 40.4% less computation than competing methods.</p>
     </div>
-  </section>
+  </section>-->
 
   <!-- BibTeX -->
   <footer class="section has-background-light">
