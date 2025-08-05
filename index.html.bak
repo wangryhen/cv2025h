@@ -65,45 +65,7 @@
 </head>
 <body>
 
-<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
 
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav> -->
 
 
 <section class="hero">
@@ -114,40 +76,10 @@
           <h1 class="title is-1 publication-title"> HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation
           </h1>
 
-          <!--div class="is-size-5 publication-authors">
-            <span class="author-block">
-              	<strong>Zixing Zhang</strong><sup>1</sup>,</span>
-            <span class="author-block">
-              <strong>Bin Wang</strong><sup>1</sup>,</span>
-            <span class="author-block">
-              <strong>Huan Zhao</strong><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <strong>Bjoern </strong><sup>2</sup>,
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Hunan University,</span>
-            <span class="author-block"><sup>2</sup>Imperial College London</span>
-
-          </div-->
+       
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
-              <!--span class="link-block">
-                <a href="https://arxiv.org/abs/2404.01647"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span
-              
-              <span class="link-block">
-                <a href=" "-->
 =======
                <!-- <a href="https://arxiv.org/abs/2404.01647"
                    class="external-link button is-normal is-rounded is-dark">
@@ -182,7 +114,7 @@
               </span>
               <!-- Codes Link. -->
               <span class="link-block">
-                <a href="https://anonymous.4open.science/r/HiSTalk_Anonymous-3FDD/README.md"
+                <a href="https://anonymous.4open.science/r/HiSTalk_Anonymous-3FDD"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -247,18 +179,6 @@
             Furthermore, HSF2S includes a squeeze and extraction weight generation mechanism to calculate the contributions of different-level speech features to landmarks, 
             and S2D includes an attention-based fusion operation to synthesize dense facial deformations, which ensures plausible lip synchronization and facial activities. 
             Extensive qualitative and quantitative experiments and user studies indicate that our method outperforms existing state-of-the-art methods.
-<!--              Speech-driven 3D facial animation has gained significant attention for its ability to create realistic and expressive facial animations in 3D space 
-             based on speech. Landmarks can comprehensively and efficiently describe speech-related movements. However, existing methods do not fully exploit the 
-             implicit context information of speech, but rather simplify using single-level (i. e., frame-level) speech features to learn landmarks and then map 
-             them into the entire facial animation. They largely overlooked the relationships between landmarks in distinct temporal regions and different-level 
-             speech features (e. g., phonemes, words, and utterances), resulting in over-smoothed facial movements. In the present work, we propose a novel framework, 
-             namely <strong>Hierarchical Speech Featurebased 3D Talking head animation (HSFTalk)</strong>, aiming to explore the correlations between different-level 
-             speech features and facial landmarks. This framework consists of two modules: Hierarchical Speech Features to Sparse landmark displacements (<strong>HSF2S</strong>) 
-             and Sparse landmarks to Dense landmarks (<strong>S2D</strong>). Specifically, HSF2S is a hierarchical structure-based encoder to establish the 
-             correlations between sparse facial landmark displacements and different-level speech features, and then S2D, a transformer-based decoder, generates the corresponding 
-             dense motion fields based on these sparse landmarks. Furthermore, HSF2S includes a weighted generation mechanism to calculate the contributions of different-level 
-             speech features to landmarks, which ensures plausible lip synchronization and facial activities. Extensive qualitative and quantitative experiments 
-             as well as user studies indicate that our method outperforms existing state-of-the-art methods. -->
             <br>
             <br>
           </p>
