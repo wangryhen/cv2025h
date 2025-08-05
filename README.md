@@ -1,4 +1,3 @@
-````markdown
 # HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation
 
 Official repository for the paper [HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation](https://anonymous.4open.science/r/HiSAAAI-3212).
@@ -12,42 +11,40 @@ Official repository for the paper [HiSTalk: Hierarchical Speech Feature-based La
 ---
 
 ## 🔗 Quick Links
-- **Project Page**: [Live demo & details](http://cv2025h.bwbwiwn.site/)
-- **Paper (arXiv)**: [PDF](https://anonymous.4open.science/r/HiSAAAI-3212)
-- **Colab Demo**: Coming soon
+
+* **Project Page**: [Live demo & details](http://cv2025h.bwbwiwn.site/)
+* **Paper (arXiv)**: [PDF](https://anonymous.4open.science/r/HiSAAAI-3212)
+* **Colab Demo**: Coming soon
 
 ---
 
 ## 🔍 Overview
+
 Given an input speech signal, **HiSTalk** generates lifelike 3D talking-head animations by combining:
 
 1. **Coarse Motion Generator (CMG)**: captures global facial trajectories from multi-scale speech embeddings via a lightweight Transformer.
 2. **Fine Motion Refiner (FMR)**:
-   - **HSF2S** (Hierarchical Speech Features → Sparse landmarks): encodes frame-, phoneme-, word-, and utterance-level cues into weighted sparse landmark displacements using a squeeze-and-excitation gating mechanism.
-   - **S2D** (Sparse → Dense): lifts weighted sparse offsets into full-face 3D deformation fields with multi-branch attention-fusion Transformer decoders.
+
+   * **HSF2S** (Hierarchical Speech Features → Sparse landmarks): encodes frame-, phoneme-, word-, and utterance-level cues into weighted sparse landmark displacements using a squeeze-and-excitation gating mechanism.
+   * **S2D** (Sparse → Dense): lifts weighted sparse offsets into full-face 3D deformation fields with multi-branch attention-fusion Transformer decoders.
 
 By fusing macro-level guidance with fine-grained refinements, HiSTalk achieves precise lip-sync and rich expressiveness on VOCASET and BIWI benchmarks.
 
 ---
 
 ## 🎥 Demos
-Visit the Project Page for interactive demos and supplementary video:  
-http://cv2025h.bwbwiwn.site/
+
+Visit the Project Page for interactive demos and supplementary video: [http://cv2025h.bwbwiwn.site/](http://cv2025h.bwbwiwn.site/)
 
 ---
 
 ## 📦 Installation
-1. Clone the repo:  
-   ```bash
-   git clone https://github.com/yourusername/HiSTalk.git
+
+1. Clone the repo:
+   git clone [https://github.com/yourusername/HiSTalk.git](https://github.com/yourusername/HiSTalk.git)
    cd HiSTalk
-````
-
 2. Install dependencies:
-
-   ```bash
    pip install -r requirements.txt
-   ```
 
 > **Note**: Official code release pending paper acceptance.
 
@@ -57,15 +54,9 @@ http://cv2025h.bwbwiwn.site/
 
 1. Prepare data: place VOCASET/BIWI audio and neutral template meshes under `data/`.
 2. Train:
-
-   ```bash
-   python train.py --dataset vocaset --batch_size 16 --lr 1e-4 --epochs 100
-   ```
+   python train.py --dataset vocaset --batch\_size 16 --lr 1e-4 --epochs 100
 3. Inference:
-
-   ```bash
    python demo.py --audio path/to/sample.wav --template neutral.obj --output results/animation.mp4
-   ```
 
 ---
 
@@ -81,17 +72,14 @@ http://cv2025h.bwbwiwn.site/
 ## 📖 Citation
 
 If you use this work, please cite:
-
-```bibtex
 @article{2025histalk,
-  title={HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation},
-  author={Anonymous},
-  year={2025},
-  eprint={arXiv},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
+title={HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation},
+author={Anonymous},
+year={2025},
+eprint={arXiv\:yourID},
+archivePrefix={arXiv},
+primaryClass={cs.CV}
 }
-```
 
 ---
 
@@ -110,6 +98,3 @@ Template courtesy of SyncTalk.
 ## ⚖️ License
 
 This project is released under the MIT License. See LICENSE for details.
-
-```
-```
