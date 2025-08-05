@@ -1,88 +1,115 @@
+````markdown
 # HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation
-The official repository of the paper [HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation](https://arxiv.org/abs/2404.01647)
 
-<p align='center'>
-  <b>
-    <a href="">Paper</a>
-    | 
-    <a href="https://wangryhen.github.io/HSFTalk.github.io/">Project Page</a>
-    |
-    <a href="https://github.com/wangryhen/HSFTALK">Code</a> 
-  </b>
-</p> 
+Official repository for the paper [HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation](https://anonymous.4open.science/r/HiSAAAI-3212).
 
-<!-- Colab notebook demonstration: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Egq0_ZK5sJAAawShxC0y4JRZQuVS2X-Z?usp=sharing) -->
-
-  <p align='center'>  
-    <img src='/paper_images/framework.svg' width='1000'/>
-  </p>
-
-Given a speech signal as input, our framework <strong>HiSTalk</strong> can generate realistic 3D talking heads through the Hierarchical Speech Features to Sparse Landmarks (<stromng>HSF2S</strong>) module and the Sparse Landmarks to Dense Landmarks Displacements (<strong>S2D</strong>) module.
-
-## Video Demonstration
-- Please click the project page.
 <p align="center">
-  <video width="720" height="400" controls>
-    <source src="./data/HSFTalk.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <a href="http://cv2025h.bwbwiwn.site/">
+    <img src="https://raw.githubusercontent.com/wangryhen/HiSTalk_Anonymous/main/paper_images/framework.png" alt="Framework overview" width="800"/>
+  </a>
 </p>
 
+---
 
-## TODO
-- [x] **Release Arxiv paper.**
-- [x] **Release Project Website.**
-- [ ] **Release code. (Once the paper is accepted)**
-- [ ] **Release Pre-trained Model. (Once the paper is accepted)**
+## 🔗 Quick Links
+- **Project Page**: [Live demo & details](http://cv2025h.bwbwiwn.site/)
+- **Paper (arXiv)**: [PDF](https://anonymous.4open.science/r/HiSAAAI-3212)
+- **Colab Demo**: Coming soon
 
+---
 
+## 🔍 Overview
+Given an input speech signal, **HiSTalk** generates lifelike 3D talking-head animations by combining:
 
-## Citation	
+1. **Coarse Motion Generator (CMG)**: captures global facial trajectories from multi-scale speech embeddings via a lightweight Transformer.
+2. **Fine Motion Refiner (FMR)**:
+   - **HSF2S** (Hierarchical Speech Features → Sparse landmarks): encodes frame-, phoneme-, word-, and utterance-level cues into weighted sparse landmark displacements using a squeeze-and-excitation gating mechanism.
+   - **S2D** (Sparse → Dense): lifts weighted sparse offsets into full-face 3D deformation fields with multi-branch attention-fusion Transformer decoders.
 
-```
-@article{2024hsftalk,
-  title={HSFTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation},
-  author={},
-  journal={arXiv preprint arXiv:2404.01647},
-  year={2024}
+By fusing macro-level guidance with fine-grained refinements, HiSTalk achieves precise lip-sync and rich expressiveness on VOCASET and BIWI benchmarks.
+
+---
+
+## 🎥 Demos
+Visit the Project Page for interactive demos and supplementary video:  
+http://cv2025h.bwbwiwn.site/
+
+---
+
+## 📦 Installation
+1. Clone the repo:  
+   ```bash
+   git clone https://github.com/yourusername/HiSTalk.git
+   cd HiSTalk
+````
+
+2. Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+> **Note**: Official code release pending paper acceptance.
+
+---
+
+## 🚀 Usage
+
+1. Prepare data: place VOCASET/BIWI audio and neutral template meshes under `data/`.
+2. Train:
+
+   ```bash
+   python train.py --dataset vocaset --batch_size 16 --lr 1e-4 --epochs 100
+   ```
+3. Inference:
+
+   ```bash
+   python demo.py --audio path/to/sample.wav --template neutral.obj --output results/animation.mp4
+   ```
+
+---
+
+## 📊 Results
+
+| Dataset     | LVE ↓  | FDD ↓  | LRP ↑  |
+| ----------- | ------ | ------ | ------ |
+| VOCASET     | 2.6715 | 3.3657 | 97.21% |
+| BIWI-Test-A | 3.7554 | 2.7129 | 91.92% |
+
+---
+
+## 📖 Citation
+
+If you use this work, please cite:
+
+```bibtex
+@article{2025histalk,
+  title={HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation},
+  author={Anonymous},
+  year={2025},
+  eprint={arXiv},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
 }
 ```
 
-## Acknowledgement
-<!-- Some code are borrowed from following projects:
-* [SpeechFormer++](https://github.com/wyhsirius/LIA)
-* [Learning Landmarks](https://github.com/OpenTalker/DPE)
-* [EAT](https://github.com/yuangan/EAT_code)
-* [PD-FGC](https://github.com/Dorniwang/PD-FGC-inference)
-* [Wav2Lip](https://github.com/Rudrabha/Wav2Lip)
-* [FOMM video preprocessing](https://github.com/AliaksandrSiarohin/video-preprocessing) -->
+---
 
-Some figures in the paper is inspired by:
-* [SpeechFormer++](https://arxiv.org/pdf/2302.14638)
-* [Learning Landmarks](https://arxiv.org/pdf/2306.01415)
-* [S2D-Dec](https://arxiv.org/pdf/2105.07463)
+## 🙏 Acknowledgements
 
-The README.md template is borrowed from [EDTalk](https://github.com/tanshuai0219/EDTalk)
+Inspired by and built upon:
 
+* SpeechFormer++ (Chen et al., 2023)
+* Learning Landmarks (Nocentini et al., 2023)
+* S2D-Dec (author, 2021)
 
-Thanks for these great projects.
-=======
->>>>>>> (update)
-# Nerfies
+Template courtesy of SyncTalk.
 
-This is the repository that contains source code for the [Nerfies website](https://nerfies.github.io).
+---
 
-If you find Nerfies useful for your work please cite:
+## ⚖️ License
+
+This project is released under the MIT License. See LICENSE for details.
+
 ```
-@article{park2021nerfies
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
-}
 ```
-
-# Website License
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-
-
