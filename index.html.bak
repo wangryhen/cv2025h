@@ -10,9 +10,6 @@
   <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
 </head>
 <body>
@@ -49,7 +46,7 @@
           <source src="./data/HSFTalk.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
-        <p class="mt-4">Demos and comparisons with CodeTalker and FaceFormer.</p>
+        <p class="mt-4">Demo video showcasing comparisons with CodeTalker, FaceFormer, and DiffusionTalker.</p>
       </div>
     </div>
   </section>
@@ -59,36 +56,59 @@
     <div class="container">
       <h2 class="title is-3">Abstract</h2>
       <div class="content">
-        <p>Speech-driven 3D facial animation has gained significant attention for its ability to create realistic and expressive facial animations in 3D space based on speech. Landmarks efficiently describe speech-related movements, but existing methods often use only frame-level features, overlooking multi-level temporal contexts (phoneme, word, utterance), leading to over-smoothed animations. We propose <strong>HiSTalk</strong>, a novel framework that correlates hierarchical speech features with landmark displacements. Our method comprises two modules: <strong>HSF2S</strong> (Hierarchical Speech Features to Sparse landmarks) and <strong>S2D</strong> (Sparse landmarks to Dense landmarks). HSF2S encodes multi-level cues via a squeeze-and-excitation gating mechanism, while S2D uses a multi-branch Transformer decoder to generate dense deformation fields, ensuring accurate lip-sync and expressive motion. Extensive experiments demonstrate state-of-the-art performance.</p>
+        <p>Speech-driven 3D talking head animation seeks to generate realistic, expressive facial motions directly from audio. Most existing methods use only single-scale (i.e., frame-level) speech features and directly regress full-face geometry, ignoring the influence of multi-level cues (phonemes, words, utterances) on facial motions, often resulting in over-smoothed, unnatural movements. To address this, we propose <strong>HiSTalk</strong>, a hierarchical framework comprising a <strong>Coarse Motion Generator (CMG)</strong> that captures global facial trajectories via a Transformer on speech embeddings, and a <strong>Fine Motion Refiner (FMR)</strong> with two stages: <em>HSF2S</em> encodes frame-, phoneme-, word-, and utterance-level features into weighted sparse landmark displacements using a squeeze-and-excitation gating mechanism, and <em>S2D</em> lifts these offsets into dense 3D deformation fields via a multi-branch attention-fusion Transformer decoder. By fusing coarse guidance with fine-grained refinements, HiSTalk achieves precise lip-sync and rich expressiveness, outperforming state-of-the-art on VOCASET and BIWI.</p>
       </div>
     </div>
   </section>
 
-  <!-- Method -->
+  <!-- Method Overview -->
   <section class="section">
     <div class="container">
-      <h2 class="title is-3">Proposed Method</h2>
-      <div class="columns is-vcentered">
-        <div class="column is-half">
-          <figure class="image">
-            <img src="./data/pipeline.png" alt="HiSTalk Pipeline">
-          </figure>
-        </div>
-        <div class="column is-half content">
-          <p>Our pipeline extracts hierarchical speech embeddings (frame, phoneme, word, utterance) using Wav2Vec 2.0 and SpeechFormer++ blocks. The <strong>HSF2S</strong> encoder computes weighted sparse landmark offsets. The <strong>S2D</strong> decoder fuses these offsets via multi-branch attention to produce dense 3D facial deformations.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Abstracted Architecture -->
-  <section class="section">
-    <div class="container">
-      <h2 class="title is-3">HSF2S Encoder Overview</h2>
-      <figure class="image is-3by1">
-        <img src="./data/encoder.png" alt="HSF2S Encoder">
+      <h2 class="title is-3">Method Overview</h2>
+      <figure class="image">
+        <img src="./data/pipeline.png" alt="HiSTalk Pipeline">
       </figure>
-      <p class="content">The encoder aligns different-level features to landmark displacements with a squeeze-and-excitation weight generator.</p>
+      <div class="content">
+        <ul>
+          <li><strong>Coarse Motion Generator (CMG)</strong>: models global facial displacements from audio via Wav2Vec 2.0 encoder and a Transformer decoder.</li>
+          <li><strong>HSF2S Encoder</strong>: extracts hierarchical speech features (frame, phoneme, word, utterance) using SpeechFormer++ blocks and applies squeeze-and-excitation gating to compute sparse landmark offsets.</li>
+          <li><strong>S2D Multi-branch Decoder</strong>: fuses sparse offsets into dense deformation fields with multi-branch attention-fusion Transformer decoders.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quantitative Results -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3">Quantitative Results</h2>
+      <table class="table is-fullwidth">
+        <thead>
+          <tr><th>Dataset</th><th>LVE ↓</th><th>FDD ↓</th><th>LRP ↑</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>VOCASET-Test</td><td>2.6715</td><td>3.3657</td><td>97.21%</td></tr>
+          <tr><td>BIWI-Test-A</td><td>3.7554</td><td>2.7129</td><td>91.92%</td></tr>
+        </tbody>
+      </table>
+      <h2 class="title is-4">User Study</h2>
+      <p>Users preferred HiSTalk over CodeTalker in lip-sync (62.2%) and realism (55.6%), and over DiffSpeaker in lip-sync (57.8%) and realism (64.4%).</p>
+    </div>
+  </section>
+
+  <!-- Ablation Study -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3">Ablation Study</h2>
+      <p>Removing CMG or FMR components increases FDD by up to 25.3% on VOCASET-Test, confirming each module’s necessity.</p>
+    </div>
+  </section>
+
+  <!-- Efficiency -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3">Efficiency</h2>
+      <p>HiSTalk runs at 4.2 FPS (0.23 s/frame) on an NVIDIA RTX 3090, using 40.4% less computation than competing methods.</p>
     </div>
   </section>
 
@@ -102,15 +122,16 @@
   journal={arXiv preprint arXiv},
   year={2025}
 }</code></pre>
+      <p class="has-text-centered">Source code based on <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. Licensed CC BY-SA 4.0.</p>
     </div>
     <div class="content has-text-centered">
-      <p>Website source code based on the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.</p>
+      <p>Website built with Bulma and custom styling.</p>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
