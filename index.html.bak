@@ -1,291 +1,118 @@
 <!DOCTYPE html>
-<html>
-  <!--script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script-->
-
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="">
-  <meta name="keywords" content="Talking head, Audio-driven, Facial disentanglement, EDTalk">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>HiSTalk</title>
+  <meta name="description" content="Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation">
+  <meta name="keywords" content="Talking head, Audio-driven, Facial animation, HiSTalk">
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-    
-   
-  </script>
-  <!--style>
-    body {
-    margin: 0;
-    padding: 0;
-    padding-left: 80px;  /* 左边距 */
-    padding-right: 80px; /* 右边距 */
-    margin-left: 80px;  /* 左边距 */
-    margin-right: 80px; /* 右边距 */
-  }
-  
-  
-  </style-->
-  
-  <style>
-  	.gray-background {
-    background-color: #999999;}
-   </style>
-
-  <link rel="icon" href="github-fill.png" sizes="16x16">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-
+  <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+</head>
+<body>
 
+  <!-- Header -->
+  <header class="hero is-primary">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">HiSTalk</h1>
+        <h2 class="subtitle">Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation</h2>
+        <div class="buttons is-centered">
+          <a href="https://anonymous.4open.science/r/HiSAAAI-3212" class="button is-dark">
+            <span class="icon"><i class="fas fa-file-pdf"></i></span>
+            <span>Paper</span>
+          </a>
+          <a href="http://cv2025h.bwbwiwn.site/" class="button is-info">
+            <span class="icon"><i class="fas fa-play-circle"></i></span>
+            <span>Demo</span>
+          </a>
+          <a href="https://github.com/yourusername/HiSTalk" class="button is-link">
+            <span class="icon"><i class="fab fa-github"></i></span>
+            <span>Code</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Teaser Video -->
+  <section class="section">
+    <div class="container">
+      <div class="box has-text-centered">
+        <video controls width="800">
+          <source src="./data/HSFTalk.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="mt-4">Demos and comparisons with CodeTalker and FaceFormer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3">Abstract</h2>
+      <div class="content">
+        <p>Speech-driven 3D facial animation has gained significant attention for its ability to create realistic and expressive facial animations in 3D space based on speech. Landmarks efficiently describe speech-related movements, but existing methods often use only frame-level features, overlooking multi-level temporal contexts (phoneme, word, utterance), leading to over-smoothed animations. We propose <strong>HiSTalk</strong>, a novel framework that correlates hierarchical speech features with landmark displacements. Our method comprises two modules: <strong>HSF2S</strong> (Hierarchical Speech Features to Sparse landmarks) and <strong>S2D</strong> (Sparse landmarks to Dense landmarks). HSF2S encodes multi-level cues via a squeeze-and-excitation gating mechanism, while S2D uses a multi-branch Transformer decoder to generate dense deformation fields, ensuring accurate lip-sync and expressive motion. Extensive experiments demonstrate state-of-the-art performance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3">Proposed Method</h2>
+      <div class="columns is-vcentered">
+        <div class="column is-half">
+          <figure class="image">
+            <img src="./data/pipeline.png" alt="HiSTalk Pipeline">
+          </figure>
+        </div>
+        <div class="column is-half content">
+          <p>Our pipeline extracts hierarchical speech embeddings (frame, phoneme, word, utterance) using Wav2Vec 2.0 and SpeechFormer++ blocks. The <strong>HSF2S</strong> encoder computes weighted sparse landmark offsets. The <strong>S2D</strong> decoder fuses these offsets via multi-branch attention to produce dense 3D facial deformations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstracted Architecture -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-3">HSF2S Encoder Overview</h2>
+      <figure class="image is-3by1">
+        <img src="./data/encoder.png" alt="HSF2S Encoder">
+      </figure>
+      <p class="content">The encoder aligns different-level features to landmark displacements with a squeeze-and-excitation weight generator.</p>
+    </div>
+  </section>
+
+  <!-- BibTeX -->
+  <footer class="section has-background-light">
+    <div class="container">
+      <h2 class="title is-4">BibTeX</h2>
+      <pre><code>@article{2025histalk,
+  title={HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation},
+  author={Anonymous},
+  journal={arXiv preprint arXiv},
+  year={2025}
+}</code></pre>
+    </div>
+    <div class="content has-text-centered">
+      <p>Website source code based on the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
-</head>
-<body>
-
-
-
-
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title"> HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation
-          </h1>
-
-       
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-
-               <!-- <a href="https://arxiv.org/abs/2404.01647"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a> -->
-              
-           <!--   </span>
-              <span class="link-block">
-                <a href=" "
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span> -->
-
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="./data/HSFTalk.mp4"
-
-                <a href="#teaser"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
-              <!-- Codes Link. -->
-              <span class="link-block">
-                <a href="https://anonymous.4open.science/r/HiSAAAI-3212"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Teaser video-->
-
-<section class="section">
-    <div class="container is-max-desktop">
-        <div class="columns is-vcentered is-centered">
-        	<div class="box">
-            <div class="column">
-                <video class="video-player" poster="" id="tree1" controls width="700" >
-                    <source src="./data/HSFTalk.mp4">
-                </video>
-                <!--div class="content has-text-justified">
-                    <p style="font-size: 1.2em;">
-                        Singing                  
-                    </p>
-                </div-->
-            </div>
-           </div>
-        </div>
-        <h3 class="subtitle has-text-centered">
-        Demos, comparison with CodeTalker and FaceFormer. 
-        </h3>
-    </div>
-</section>
-<!-- End teaser video -->
-
-
-
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Speech-driven 3D facial animation has gained significant attention for its ability to create realistic and expressive facial animations in 3D space based on speech. 
-            Landmarks can comprehensively and efficiently describe speech-related movements.
-            However, existing methods do not fully exploit the implicit context information of speech, but rather simplify using single-level (i. e., frame-level) speech features to learn landmarks and 
-            then map them into the entire facial animation. 
-            They largely overlooked the relationships between landmarks in distinct temporal regions and different-level speech features (e. g., phonemes, words, and utterances), resulting in over-smoothed 
-            facial movements. In the present work, we propose a novel framework, namely <strong>Hierarchical Speech feature-based 3D Talking head animation (HiSTalk)</strong>, 
-            to explore the correlations between different-level speech features and facial landmarks. 
-            This framework consists of two modules: Hierarchical Speech Features to Sparse landmark displacements (HSF2S) and Sparse landmarks to Dense landmarks (S2D). 
-            Specifically, <strong>HSF2S</strong> is a hierarchical structure-based encoder to establish the correlations between sparse facial landmark displacements and different-level speech features; 
-            then, <strong>S2D</strong> -- a Transformer-based multi-branch fusion decoder -- generates the corresponding dense motion fields based on these sparse landmarks. 
-            Furthermore, HSF2S includes a squeeze and extraction weight generation mechanism to calculate the contributions of different-level speech features to landmarks, 
-            and S2D includes an attention-based fusion operation to synthesize dense facial deformations, which ensures plausible lip synchronization and facial activities. 
-            Extensive qualitative and quantitative experiments and user studies indicate that our method outperforms existing state-of-the-art methods.
-            <br>
-            <br>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="content has-text-justified">
-    	<center>
-          <img src="./data/framework.png" alt="synctalk" width="600" ></center>
-          <p>
-            <br>
-            Given a speech signal as input, our framework HiSTalk can generate realistic 3D talking heads through the Hierarchical Speech Features to Sparse Landmarks (HSF2S) 
-            module and the Sparse Landmarks to Dense Landmarks Displacements (S2D) module.
-          </p>
-
-          <!-- <p>
-
-          </p>
-          <p>
-
-          </p> -->
-    </div>
-    
-    <br>
-    <br>
-
-    <!-- Proposed Method. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Proposed Method</h2>
-        <div class="content has-text-justified">
-          <center><img src="./data/pipeline.png" alt="synctalk" width="600" ></center>
-          <p>
-            <br>
-            Pipeline of our proposed HiSTalk. HiSTalk, learning the correlations between HSF and facial landmarks, receives a raw audio 𝐴 as input and generates a sequence of 
-            3D facial animation from sparse to dense landmark displacements. The Acoustic Feature Extractor is Wav2Vec 2.0, and the Hierarchical Feature Extractor follows the 
-            SpeechFormer++ block. The weighted generation mechanism calculates the contribution of frame-level, phoneme-level, word-level, and utterance-level speech features 
-            to landmark displacements. Then S2D uses a Transformer-based decoder to generate the dense landmark displacement sequences for rendering the animation.
-          </p>
-
-        </div>
-
-        
-        <div class="content has-text-justified">
-          <center><img src="./data/encoder.png" alt="synctalk" width="600" ></center>
-          <p>
-            <br>
-             Overview of hierarchical speech feature-based landmark displacements encoder with a weighted generation module.
-          </p>
-          <!-- <p>
-
-          </p>
-          <p>
-
-          </p> -->
-        </div>
-    </div>
-    
-    <!--/ Proposed Method. -->
-</section>
-
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{2025histalk,
-  title={HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation},
-  author={},
-  journal={arXiv preprint arXiv},
-  year={2025}
-}</code></pre>
-  </div>
-</section>
-
-
-
-
-<footer class="gray-background">
-  <div class="container">
-      <div class="content has-text-centered">
-          <a class="icon-link" href="https://arxiv.org/abs/2404.01647">
-              <i class="fas fa-file-pdf"></i> <span>Paper</span>
-          </a>
-          <a class="icon-link" href="https://anonymous.4open.science/r/HiSAAAI-3212" class="external-link" disabled>
-              <i class="fab fa-github"></i> <span>Code</span>
-          </a>
-      </div>
-      <div class="columns is-centered">
-          <div class="column is-8">
-              <div class="content">
-                  <p style="text-align:center">
-                    This website is licensed under a <a rel="license"
-                    href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-                    Commons Attribution-ShareAlike 4.0 International License</a>.
-                  </p>
-                  <p style="text-align:center">
-                    Website source code based on the <a
-                    href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.
-                  </p>
-
-              </div>
-          </div>
-      </div>
-  </div>
-</footer>
-
-
 </body>
 </html>
