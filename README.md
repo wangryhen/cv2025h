@@ -57,7 +57,8 @@ Visit the Project Page for interactive demos and supplementary video: [http://cv
    python train.py --dataset vocaset --batch\_size 16 --lr 1e-4 --epochs 100
 3. Inference:
    python demo.py --audio path/to/sample.wav --template neutral.obj --output results/animation.mp4
-
+   
+> **Note**: Official code release pending paper acceptance.
 ---
 
 ## 📊 Results
