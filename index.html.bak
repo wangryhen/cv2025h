@@ -80,7 +80,7 @@
 
           <div class="column has-text-centered">
             <div class="publication-links">
-=======
+
                <!-- <a href="https://arxiv.org/abs/2404.01647"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -103,7 +103,7 @@
               <!-- Video Link. -->
               <span class="link-block">
                 <a href="./data/HSFTalk.mp4"
-=======
+
                 <a href="#teaser"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
