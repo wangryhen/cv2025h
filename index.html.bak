@@ -61,22 +61,27 @@
     </div>
   </section>
 
-  <!-- Method Overview -->
-  <section class="section">
-    <div class="container">
-      <h2 class="title is-3">Method Overview</h2>
-      <figure class="image">
-        <img src="./data/framework.png" alt="HiSTalk Pipeline">
-      </figure>
-      <div class="content">
-        <ul>
-          <li><strong>Coarse Motion Generator (CMG)</strong>: models global facial displacements from audio via Wav2Vec 2.0 encoder and a Transformer decoder.</li>
-          <li><strong>HSF2S Encoder</strong>: extracts hierarchical speech features (frame, phoneme, word, utterance) using SpeechFormer++ blocks and applies squeeze-and-excitation gating to compute sparse landmark offsets.</li>
-          <li><strong>S2D Multi-branch Decoder</strong>: fuses sparse offsets into dense deformation fields with multi-branch attention-fusion Transformer decoders.</li>
-        </ul>
-      </div>
+<!-- Method Overview -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3">Method Overview</h2>
+    <figure class="image">
+      <img src="./data/pipeline.png" alt="HiSTalk Pipeline">
+    </figure>
+    <div class="content">
+      <ul>
+        <li><strong>Coarse Motion Generator (CMG)</strong>: captures global facial displacements from audio via a Wav2Vec 2.0 encoder and a Transformer decoder.</li>
+        <li><strong>Fine Motion Refiner (FMR)</strong>:
+          <ul>
+            <li><em>HSF2S Encoder</em>: extracts hierarchical speech features (frame, phoneme, word, utterance) using SpeechFormer++ blocks and applies squeeze-and-excitation gating to compute sparse landmark offsets.</li>
+            <li><em>S2D Decoder</em>: fuses sparse offsets into dense deformation fields with multi-branch attention-fusion Transformer decoders.</li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Quantitative Results -->
   <section class="section">
