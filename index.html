@@ -4,137 +4,329 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>HiSTalk</title>
-  <meta name="description" content="Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation">
-  <meta name="keywords" content="Talking head, Audio-driven, Facial animation, HiSTalk">
+
+  <meta name="description"
+        content="Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation">
+
+  <meta name="keywords"
+        content="Talking head, Audio-driven, Facial animation, HiSTalk">
 
   <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans"
+        rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+
+  <style>
+    body {
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      background: #fafafa;
+    }
+
+    .hero.is-primary {
+      background: linear-gradient(135deg, #1f2937, #374151);
+    }
+
+    .video-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .demo-video {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      background: black;
+    }
+
+    .framework-image {
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+
+    .result-table {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    footer pre {
+      border-radius: 10px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <!-- Header -->
+  <!-- ================= HEADER ================= -->
   <header class="hero is-primary">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <h1 class="title">HiSTalk</h1>
-        <h2 class="subtitle">Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation</h2>
-        <div class="buttons is-centered">
-          <a href="http://cv2025h.bwbwiwn.site/" class="button is-info">
-            <span class="icon"><i class="fas fa-play-circle"></i></span>
+
+        <h1 class="title is-1 has-text-white">
+          HiSTalk
+        </h1>
+
+        <h2 class="subtitle is-4 has-text-light">
+          Hierarchical Speech Feature-based Landmark Displacements
+          for 3D Talking Head Animation
+        </h2>
+
+        <div class="buttons is-centered mt-5">
+
+          <a href="http://cv2025h.bwbwiwn.site/"
+             class="button is-info is-medium">
+
             <span>Demo</span>
           </a>
-          <a href="https://github.com/wangryhen/HiSAAAI/tree/main" class="button is-link">
-            <span class="icon"><i class="fab fa-github"></i></span>
+
+          <a href="https://github.com/wangryhen/HiSAAAI/tree/main"
+             class="button is-link is-medium">
+
             <span>Code</span>
           </a>
+
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Teaser Video -->
+  <!-- ================= VIDEO ================= -->
   <section class="section">
     <div class="container">
-      <div class="box has-text-centered">
-        <video controls width="800", preload="metadata">
-          <source src="https://github.com/wangryhen/cv2025h/releases/download/v1.0/HiSTalk.mp4" type="video/mp4">
+
+      <div class="video-wrapper">
+
+        <h2 class="title is-3 has-text-centered mb-5">
+          Demo Video
+        </h2>
+
+        <!--
+          推荐：
+          1. 使用重新编码后的 MP4
+          2. ffmpeg 添加 faststart
+          3. 尽量控制视频大小
+        -->
+
+        <video
+          class="demo-video"
+          controls
+          playsinline
+          preload="metadata"
+          poster="./static/images/poster.jpg"
+        >
+          <source
+            src="https://github.com/wangryhen/cv2025h/releases/download/v1.0/HiSTalk.mp4"
+            type="video/mp4">
+
           Your browser does not support the video tag.
         </video>
-        <p class="mt-4">Demo video showcasing comparisons with CodeTalker, FaceFormer, and DiffSpeaker.</p>
+
+        <p class="has-text-centered mt-4">
+          Comparisons with CodeTalker, FaceFormer, and DiffSpeaker.
+        </p>
+
       </div>
     </div>
   </section>
 
-  <!-- Abstract -->
+  <!-- ================= ABSTRACT ================= -->
   <section class="section">
     <div class="container">
-      <h2 class="title is-3">Abstract</h2>
+
+      <h2 class="title is-3">
+        Abstract
+      </h2>
+
+      <div class="content is-medium">
+
+        <p>
+          Speech-driven 3D talking head animation seeks to generate realistic,
+          expressive facial motions directly from audio.
+          Most existing methods use only single-scale
+          (i.e., frame-level) speech features and directly regress full-face
+          geometry, ignoring the influence of multi-level cues
+          (phonemes, words, utterances) on facial motions,
+          often resulting in over-smoothed, unnatural movements.
+        </p>
+
+        <p>
+          To address this, we propose <strong>HiSTalk</strong>,
+          a hierarchical framework comprising:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Coarse Motion Generator (CMG)</strong>
+          </li>
+
+          <li>
+            <strong>Fine Motion Refiner (FMR)</strong>
+            including:
+            <ul>
+              <li>HSF2S Encoder</li>
+              <li>S2D Decoder</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p>
+          HiSTalk achieves precise lip-sync and expressive facial animation,
+          outperforming state-of-the-art methods on VOCASET and BIWI.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= METHOD ================= -->
+  <section class="section">
+    <div class="container">
+
+      <h2 class="title is-3">
+        Method Overview
+      </h2>
+
+      <figure class="image mb-5">
+        <img
+          class="framework-image"
+          src="./data/framework.png"
+          alt="HiSTalk Framework">
+      </figure>
+
+      <div class="content is-medium">
+
+        <ul>
+
+          <li>
+            <strong>CMG:</strong>
+            captures global facial motion trajectories from audio.
+          </li>
+
+          <li>
+            <strong>FMR:</strong>
+            refines local facial dynamics through hierarchical speech modeling.
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section class="section">
+    <div class="container">
+
+      <h2 class="title is-3">
+        Quantitative Results
+      </h2>
+
+      <div class="table-container result-table">
+
+        <table class="table is-fullwidth is-striped is-hoverable">
+
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>LVE ↓</th>
+              <th>FDD ↓</th>
+              <th>LRP ↑</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>VOCASET-Test</td>
+              <td>2.6715</td>
+              <td>3.3657</td>
+              <td>97.21%</td>
+            </tr>
+
+            <tr>
+              <td>BIWI-Test-A</td>
+              <td>3.7554</td>
+              <td>2.7129</td>
+              <td>91.92%</td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+      <h3 class="title is-4 mt-6">
+        User Study
+      </h3>
+
       <div class="content">
-        <p>Speech-driven 3D talking head animation seeks to generate realistic, expressive facial motions directly from audio. Most existing methods use only single-scale (i.e., frame-level) speech features and directly regress full-face geometry, ignoring the influence of multi-level cues (phonemes, words, utterances) on facial motions, often resulting in over-smoothed, unnatural movements. To address this, we propose <strong>HiSTalk</strong>, a hierarchical framework comprising a <strong>Coarse Motion Generator (CMG)</strong> that captures global facial trajectories via a Transformer on speech embeddings, and a <strong>Fine Motion Refiner (FMR)</strong> with two stages: <em>HSF2S</em> encodes frame-, phoneme-, word-, and utterance-level features into weighted sparse landmark displacements using a squeeze-and-excitation gating mechanism, and <em>S2D</em> lifts these offsets into dense 3D deformation fields via a multi-branch attention-fusion Transformer decoder. By fusing coarse guidance with fine-grained refinements, HiSTalk achieves precise lip-sync and rich expressiveness, outperforming state-of-the-art on VOCASET and BIWI.</p>
+        <p>
+          Users preferred HiSTalk over CodeTalker in lip-sync (62.2%)
+          and realism (55.6%), and over DiffSpeaker in lip-sync (57.8%)
+          and realism (64.4%).
+        </p>
       </div>
+
     </div>
   </section>
 
-<!-- Method Overview -->
-<section class="section">
-  <div class="container">
-    <h2 class="title is-3">Method Overview</h2>
-    <figure class="image">
-      <img src="./data/framework.png" alt="HiSTalk Pipeline">
-    </figure>
-    <div class="content">
-      <ul>
-        <li><strong>Coarse Motion Generator (CMG)</strong>: captures global facial displacements from audio via a Wav2Vec 2.0 encoder and a Transformer decoder.</li>
-        <li><strong>Fine Motion Refiner (FMR)</strong>:
-          <ul>
-            <li><em>HSF2S Encoder</em>: extracts hierarchical speech features (frame, phoneme, word, and utterance) using SpeechFormer++ blocks and applies squeeze-and-excitation gating to compute sparse landmark offsets.</li>
-            <li><em>S2D Decoder</em>: fuses sparse offsets into dense deformation fields with multi-branch attention-fusion Transformer decoders.</li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-
-  <!-- Quantitative Results -->
+  <!-- ================= ABLATION ================= -->
   <section class="section">
     <div class="container">
-      <h2 class="title is-3">Quantitative Results</h2>
-      <table class="table is-fullwidth">
-        <thead>
-          <tr><th>Dataset</th><th>LVE ↓</th><th>FDD ↓</th><th>LRP ↑</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>VOCASET-Test</td><td>2.6715</td><td>3.3657</td><td>97.21%</td></tr>
-          <tr><td>BIWI-Test-A</td><td>3.7554</td><td>2.7129</td><td>91.92%</td></tr>
-        </tbody>
-      </table>
-      <h2 class="title is-4">User Study</h2>
-      <p>Users preferred HiSTalk over CodeTalker in lip-sync (62.2%) and realism (55.6%), and over DiffSpeaker in lip-sync (57.8%) and realism (64.4%).</p>
+
+      <h2 class="title is-3">
+        Ablation Study
+      </h2>
+
+      <div class="content is-medium">
+        <p>
+          Removing CMG or FMR increases FDD significantly on VOCASET-Test,
+          confirming the necessity of each module.
+        </p>
+      </div>
+
     </div>
   </section>
 
-  <!-- Ablation Study -->
-  <section class="section">
-    <div class="container">
-      <h2 class="title is-3">Ablation Study</h2>
-      <p>Removing CMG or FMR components increases FDD by up to 25.3% on VOCASET-Test, confirming each module’s necessity.</p>
-    </div>
-  </section>
-
-  <!-- Efficiency -->
- <!-- <section class="section">
-    <div class="container">
-      <h2 class="title is-3">Efficiency</h2>
-      <p>HiSTalk runs at 4.2 FPS (0.23 s/frame) on an NVIDIA RTX 3090, using 40.4% less computation than competing methods.</p>
-    </div>
-  </section>-->
-
-  <!-- BibTeX -->
+  <!-- ================= BIBTEX ================= -->
   <footer class="section has-background-light">
+
     <div class="container">
-      <h2 class="title is-4">BibTeX</h2>
-      <pre><code>@article{2025histalk,
-  title={HiSTalk: Hierarchical Speech Feature-based Landmark Displacements for 3D Talking Head Animation},
+
+      <h2 class="title is-4">
+        BibTeX
+      </h2>
+
+<pre><code>@article{2025histalk,
+  title={HiSTalk: Hierarchical Speech Feature-based Landmark Displacements
+         for 3D Talking Head Animation},
   author={Anonymous},
   journal={arXiv preprint arXiv},
   year={2025}
 }</code></pre>
-      <p class="has-text-centered">Source code based on <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. Licensed CC BY-SA 4.0.</p>
-    </div>
-    <div class="content has-text-centered">
-      <p>Website built with Bulma and custom styling.</p>
+
+      <div class="content has-text-centered mt-5">
+
+        <p>
+          Source code based on
+          <a href="https://github.com/nerfies/nerfies.github.io">
+            Nerfies
+          </a>.
+        </p>
+
+        <p>
+          Website built with Bulma and custom styling.
+        </p>
+
+      </div>
+
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- ================= JS ================= -->
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+
 </body>
 </html>
