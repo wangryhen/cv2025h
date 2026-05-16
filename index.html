@@ -69,7 +69,7 @@
         <li><strong>Coarse Motion Generator (CMG)</strong>: captures global facial displacements from audio via a Wav2Vec 2.0 encoder and a Transformer decoder.</li>
         <li><strong>Fine Motion Refiner (FMR)</strong>:
           <ul>
-            <li><em>HSF2S Encoder</em>: extracts hierarchical speech features (frame, phoneme, word, utterance) using SpeechFormer++ blocks and applies squeeze-and-excitation gating to compute sparse landmark offsets.</li>
+            <li><em>HSF2S Encoder</em>: extracts hierarchical speech features (frame, phoneme, word, and utterance) using SpeechFormer++ blocks and applies squeeze-and-excitation gating to compute sparse landmark offsets.</li>
             <li><em>S2D Decoder</em>: fuses sparse offsets into dense deformation fields with multi-branch attention-fusion Transformer decoders.</li>
           </ul>
         </li>
